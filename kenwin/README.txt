@@ -27,6 +27,15 @@ _change username according to your local system username -- this will come in ha
 postgres=# CREATE USER username WITH PASSWORD 'password';
 postgres=# CREATE DATABASE kenwin_test OWNER owner;
 
+- Add next lines to "pg_hba.conf" file.
+
+local   kenwin_test    username                                    peer
+host    kenwin_test    username            127.0.0.1               md5
+
+- Restart PostgreSQL database.
+
+service postgresql restart
+
 - Initialize and upgrade the database using Alembic.
 
     - Generate your first revision.
