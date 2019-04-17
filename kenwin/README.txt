@@ -10,19 +10,19 @@ Getting Started
 
 - Create a Python virtual environment.
 
-    python3 -m venv env
+    virtualenv -p python3 envname
 
 - Upgrade packaging tools.
 
     env/bin/pip install --upgrade pip setuptools
 
-- Install the project in editable mode with its testing requirements.
+- Install the project in editable mode with its requirements.
 
-    env/bin/pip install -e ".[testing]"
+    env/bin/pip install -e .
     
 - Create PostgreSQL Database.
 
-_change username according to your local system username -- this will come in handy when setting up peer authentication._
+WARNING!: select a username according to your local system username -- this will come in handy when setting up peer authentication.
 
 postgres=# CREATE USER username WITH PASSWORD 'password';
 postgres=# CREATE DATABASE kenwin_test OWNER owner;
@@ -32,11 +32,8 @@ postgres=# CREATE DATABASE kenwin_test OWNER owner;
 local   kenwin_test    username                                    peer
 host    kenwin_test    username            127.0.0.1               md5
 
-- Restart PostgreSQL database.
 
-service postgresql restart
-
-- Initialize and upgrade the database using Alembic.
+- Initialize and upgrade the database using Alembic. This will create an user with username 'admin_user' and password 'admin'.
 
     - Generate your first revision.
 
@@ -49,11 +46,8 @@ service postgresql restart
 - Load default data into the database using a script.
 
     env/bin/initialize_kenwin_db development.ini
+    WARNING!: If this step throws an ImportError, try deactivating and activating back the virtual environment.
 
-- Run your project's tests.
-
-    env/bin/pytest
-
-- Run your project.
+- Run the project.
 
     env/bin/pserve development.ini
