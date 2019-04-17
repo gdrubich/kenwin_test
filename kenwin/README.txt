@@ -19,6 +19,13 @@ Getting Started
 - Install the project in editable mode with its testing requirements.
 
     env/bin/pip install -e ".[testing]"
+    
+- Create PostgreSQL Database.
+
+_change username according to your local system username -- this will come in handy when setting up peer authentication._
+
+postgres=# CREATE USER username WITH PASSWORD 'password';
+postgres=# CREATE DATABASE kenwin_test OWNER owner;
 
 - Initialize and upgrade the database using Alembic.
 
